@@ -1,0 +1,36 @@
+{%extends 'profile_base.html'%}
+{%block profile_head%}
+<h1 class="left imp1">Update:</h1>
+{%endblock%}
+{%block profile_des%}
+<div class="left ">
+    
+    <form enctype="multipart/form-data" method="POST">
+        {%csrf_token%}
+        <label class="in" for="{{ form.username.id_for_label }}">Update username:</label>
+        {{ form.username }}
+        <br>
+        <label class="in" for="{{ form.emaill.id_for_label }}">Update Email:</label>
+        {{ form.email }}
+        <br>
+        <label class="in" for="{{ form.image.id_for_label }}">Update profile picture:</label>
+        {{ form.image }}
+        <br>
+        <p class="in">Update description:</p>
+        {{ form.description }}
+        <br><br>
+        <label class="in" for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+        {{ form.password2 }}
+        <br>
+        {%if errors%}
+        <ul>
+            {% for key, value in errors.items %} 
+            <li>{{value}}</li>
+            {% endfor %}
+        </ul>
+        {%endif%}
+        <input class="btn btn-success" type="submit" value="Update">
+        <a class="btn btn-danger" href="{%url 'accounts:profile' pk=user.pk%}">Cancel</a>
+    </form>
+</div>
+{%endblock%}

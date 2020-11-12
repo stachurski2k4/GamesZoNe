@@ -1,0 +1,19 @@
+{%extends 'base.html'%}
+{%block content%}
+    <h1>Users :</h1>
+    <hr>
+    {%load static%}
+    {%for profile in list%}
+    <a href="{%url 'accounts:profile' pk=profile.pk%}">
+        <div class="profile_widget">
+            {%if profile.image%}
+                <img src="{{profile.image.url}}" alt="{%static 'images/base_user.jpg'%}" width="64" height="64">
+            {%else%}
+                <img src="{%static 'images/base_user.png' %}" alt="Server Error" width="64" height="64">
+            {%endif%}
+            <h2 class="inline margin-left">{{profile.username}}</h2>
+            <p class="margin-left">Level :{{profile.authorization_level}}</p>
+            </div>
+    </a>
+    {%endfor%}
+{%endblock%}

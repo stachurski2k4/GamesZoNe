@@ -1,0 +1,35 @@
+{%extends 'profile_base.html'%}
+{%block profile_head%}
+<h1 class="left imp1">Sing Up:</h1>
+{%endblock%}
+{%block profile_des%}
+<div class="left ">
+    {%if registered%}
+    <h1>Thanks for registering!</h1>
+    <h2><a href="{%url 'accounts:login'%}">Please Login</a></h2> 
+    {%else%}
+    <form enctype="multipart/form-data" method="POST">
+        {%csrf_token%}
+        <label class="in" for="{{ form.username.id_for_label }}">Pick up a Name:</label>
+        {{ form.username }}
+        <br>
+        <label class="in" for="{{ form.emaill.id_for_label }}">Email:</label>
+        {{ form.email }}
+        <br>
+        <label class="in" for="{{ form.image.id_for_label }}">Chose a profile picture:</label>
+        {{ form.image }}
+        <br>
+        <p class="in">Description of profile:</p>
+        {{ form.description }}
+        <br><br>
+        <label class="in" for="{{ form.password.id_for_label }}">Password:</label>
+        {{ form.password }}
+        <br>
+        <label class="in" for="{{ form.password2.id_for_label }}">Repeat Password:</label>
+        {{ form.password2 }}
+        <br>
+        <input class="btn btn-success" type="submit" value="Sign Up">
+    </form>
+{%endif%}
+</div>
+{%endblock%}

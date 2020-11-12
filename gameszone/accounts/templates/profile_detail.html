@@ -1,0 +1,33 @@
+{%extends 'profile_base.html'%}
+
+{%block profile_head%}
+
+    {%if profile.image%}
+        <a href="{{profile.image.url}}" class="center">
+            <img src="{{profile.image.url}}" alt="Server Error" width="264" height="264">
+        </a>
+    {%else%}
+        {%load static%}
+        <img src="{% static 'images/base_user.png' %}" alt="Server Error" width="264" height="264">
+    {%endif%}
+    <div class="profile-h">
+        <h1 class="imp1">{{profile.username}}</h1>
+        <h4 class="imp2">Level : {{profile.authorization_level}}</h4>
+        <p>Joined at: {{profile.creted_date}}</p>
+    </div>
+{%endblock%}
+
+{%block profile_des%}
+    <p>{{profile.description}}</p>
+    <h5 class="imp3">Conntact me at : {{profile.email}}</h5>
+</div>
+{%if user.is_authenticated %}
+    {%if user.username == profile.username %}
+        <a class="btn btn-warning" href="{%url 'accounts:profile_edit' pk=user.pk%}">Edit Profile</a>
+        <a class="btn btn-warning" href="{%url 'accounts:pass_edit' pk=user.pk%}">Edit Password</a>
+    {%endif%}
+    {%if user.is_staff%}
+        <a class="btn btn-warning" href="{%url 'accounts:level_edit' pk=profile.pk%}">Edit Level</a>
+    {%endif%}
+{%endif%}
+{%endblock%}

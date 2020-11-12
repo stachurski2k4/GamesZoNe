@@ -1,0 +1,11 @@
+{%extends 'games_base.html'%}
+{%block games%}
+<form method="POST">
+    <h1 class="imp1">Add Comment</h1>
+    {%csrf_token%}
+    <h4>Message :</h4>
+    {{form.message}}
+    <br>
+    <input class="btn btn-success" type="submit" value="Comment">
+</form>
+{%endblock%}

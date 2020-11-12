@@ -1,0 +1,56 @@
+{%extends 'base.html'%}
+{%block style%}
+{%load static%}
+    <link rel="stylesheet" href="{%static 'css/games/main.css'%}">
+{%endblock%}
+{%block content%}
+<div class="homepage game_main">
+    {%if user.is_authenticated%}
+        <h1 class="imp1 center">Welcome <a href="{%url 'accounts:profile' pk=user.pk%}">{{user.username}}</a></h1>
+    {%else%}
+        <h1 class="imp1 center">Welcome to GamesZoNe</h1>
+        <p class="center">GamesZoNe is a place where you can explore, download, rate and give feedback to indie games created by indie developers.</p>
+    {%endif%}
+    <div class="myrow">
+        <h3>Most popular games:</h3>
+        <hr>
+        <div class="row ">
+            {%for game in popular_games%}
+            <div class="game col-lg-3 col-md-4 col-sm-6">
+            <a href="{%url 'games:game' pk=game.pk%}">
+                    {%if game.image%}
+                        <img src="{{game.image.url}}" alt="Error" width="128" height="128">
+                    {%else%}
+                    {%load static%}
+                        <img src="{%static 'images/base_game.png' %}" alt="Server Error" width="128" height="128">
+                    {%endif%}<br>
+                    <h3 >{{game.title}}</h3>
+            </a>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+    <div class="myrow">
+        <h3>Latest games:</h3>
+        <hr>
+        <div class="row ">
+            {%for game in latest_games%}
+            <div class="game col-lg-3 col-md-4 col-sm-6">
+            <a href="{%url 'games:game' pk=game.pk%}">
+                    {%if game.image%}
+                        <img src="{{game.image.url}}" alt="Error" width="128" height="128">
+                    {%else%}
+                    {%load static%}
+                        <img src="{%static 'images/base_game.png' %}" alt="Server Error" width="128" height="128">
+                    {%endif%}<br>
+                    <h3 >{{game.title}}</h3>
+            </a>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+<div class="info center">
+    <a class="" href="{%url 'info'%}">Informations</a>
+</div>
+{%endblock%}

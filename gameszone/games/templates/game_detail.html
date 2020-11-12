@@ -1,0 +1,86 @@
+{%extends 'game_base.html'%}
+{%block game_h%}
+<h1 class="imp1 center">{{game.title}}</h1>
+<h4 class="imp3"><a  href="{%url 'accounts:profile' pk=game.author.pk%}">Created by @{{game.author}}</a></h4>
+<h4 class="error">Status : {{game.status}}</h4>
+{%if user.pk == game.author.pk%}
+    <a class="btn btn-warning" href="{%url 'games:game_edit' pk=game.pk%}">Edit Game</a>
+    <a class="btn btn-danger" href="{%url 'games:game_delete' pk=game.pk%}">Delete Game</a>
+
+{%endif%}
+{%endblock%}
+
+{%block game_des%}
+<p>{{game.description}}</p>
+<div class="screen center" id="screen"></div>
+<div style="display: none;" class="data" id='data'>{%for scr in game.screens.all%},{{scr.image.url}}{%endfor%}</div>
+<br>
+<script>
+var num=0;
+var timer1=0;
+ var data=document.getElementById("data").innerHTML;
+ data=data.split(',')
+ urls=[data.length-1]
+ for (let index = 1; index < data.length; index++) {
+     urls[index-1]=data[index]
+ }
+ if(urls.length>0 && urls[0]!=0){
+     console.log(urls)
+    document.getElementById("screen").innerHTML='<div id="slider"></div><button class="btn-slider"type="button" onclick="backward()"><</button><button class="btn-slider"type="button" onclick="forward()">></button>'
+    changeSlide()
+    
+ }
+ function changeSlide(){
+    num++;
+    if(num==urls.length)num=0;
+    if(num<0)num=urls.length-1;
+    var file="<img src=\""+urls[num]+"\"/>";
+    document.getElementById("slider").innerHTML=file;
+    timer1=setTimeout("changeSlide()",5000);
+ }
+ function setSlide(){
+    clearTimeout(timer1);
+    changeSlide()
+}
+ function forward(){
+    setSlide();
+}
+function backward(){
+    num=num-2;
+    setSlide();
+}
+</script>
+{%if user.pk == game.author.pk%}
+    <a class="btn btn-success" href="{%url 'games:image_add' pk=game.pk%}">Add Image</a>
+{%endif%}
+{%endblock%}
+
+{%block game_dow%}
+        {%for version in game.versions.all %}
+            <div class="ver">
+                <a class="btn btn-info inline" href="{{version.download.url}}" download>Download File</a>
+                <h3 class="inline">Version : {{version.version_str}}</h3>
+                <h3 class="inline noimp">Created at: {{version.creted_date}}</h3>
+                <a class="btn btn-danger inline margin-left" href="{%url 'games:delete_version' pk=version.pk%}">Delete Version</a>
+            </div><br>
+            {%empty%}
+            <h5 class="error">No versions avilable!</h5>
+        {%endfor%}
+        <br>
+        {%if user.is_authenticated and user.is_staff%}
+            <h3 class="btn btn-danger"><a href="{%url 'games:version_add' pk=game.pk%}">Add Version</a></h3>
+        {%endif%}
+        <hr>
+        <h3>{{game.comments.all|length}} Comments</h3>
+        {%if user.is_authenticated%}
+            <a class="btn btn-success inline" href="{%url 'games:comment_add' pk=game.pk%}">Add Comment</a>
+        {%endif%}
+        <br>
+        {%for comment in game.comments.all%}
+            <div class="comment">
+                <h4 class="inline"><a href="{%url 'accounts:profile' pk=comment.author.pk%}">@{{comment.author.username}}</a></h4>
+                <p class="inline">{{comment.creted_date}}</p>
+                <p>{{comment.message}}</p>
+            </div>
+        {%endfor%}
+{%endblock%}

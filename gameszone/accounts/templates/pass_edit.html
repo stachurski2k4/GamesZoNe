@@ -1,0 +1,41 @@
+{%extends 'profile_base.html'%}
+{%block profile_head%}
+{%if form.password%}
+    <h1 class="imp1 left">Change your password:</h1>
+{%else%}
+    <h1 class="imp1 left">Change level:</h1>
+{%endif%}
+{%endblock%}
+{%block profile_des%}
+<div class="left">
+    <form method="POST">
+        {%csrf_token%}
+        {%if form.password%}
+            <label class="in" for="{{ form.password.id_for_label }}">Password:</label>
+            {{ form.password }}
+            <br>
+            <label class="in" for="{{ form.password1.id_for_label }}">New Password:</label>
+            {{ form.password1 }}
+            <br>
+            <label class="in" for="{{ form.password2.id_for_label }}">Repeat Password:</label>
+            {{ form.password2 }}
+            <br>
+            {%if errors%}
+            <ul>
+                {% for key, value in errors.items %} 
+                <li class="error">{{value}}</li>
+                {% endfor %}
+            </ul>
+            {%endif%}
+        {%else%}
+            <label class="in" for="field">Level:</label>
+            <div class="black field" id="field" name="field">{{ form.authorization_level }}</div>
+            
+            <br>
+        {%endif%}
+        <input class="btn btn-success" type="submit" value="Change">
+        <a class="btn btn-danger" href="{%url 'accounts:profile' pk=user.pk%}">Cancel</a>
+    </form>
+</div>
+
+{%endblock%}

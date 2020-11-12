@@ -1,0 +1,19 @@
+{%extends 'games_base.html'%}
+{%block games%}
+<form  enctype="multipart/form-data" method="POST">
+    {%csrf_token%}
+    <label class="in" for="{{ form.title.id_for_label }}">Title :</label>
+    {{ form.title }}
+    <br>
+    <label class="in" for="{{ form.image.id_for_label }}">Icon of game :</label>
+    {{ form.image }}
+    <br>
+    <label class="in" for="{{ form.image.id_for_label }}">Set game's status :</label>
+    {{ form.status}}
+    <br>
+    <p class="in">Description of game :</p>
+    {{ form.description }}
+    <br><br>
+    <input class="btn btn-success" type="submit" value="Save">
+</form>
+{%endblock%}

@@ -1,0 +1,27 @@
+.profile{
+    background-color: #343a40;
+    margin-top: 50px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+.profile-h{
+    margin-bottom: 40px;
+}
+.profile-des{
+    margin-bottom: 40px;
+}
+.in{
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+.field{
+    width: 230px;
+    height: 34px;
+    color: black;
+    font-size: 18px;
+}
+.black{
+    color: black;
+}

@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+{%block style%}
+{%load static%}
+<link rel="stylesheet" href="{%static 'css/accounts/profile.css'%}">
+
+{%endblock%}
+{%block content%}
+
+<div class="profile">
+    <div class="profile-h">
+        {%block profile_head%}
+        {%endblock%}
+    </div>
+  
+   <hr>
+<div class="profile-des">
+   {%block profile_des%}
+   {%endblock%}
+</div>
+</div>
+
+{%endblock%}

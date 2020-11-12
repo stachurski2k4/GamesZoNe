@@ -1,0 +1,14 @@
+{%extends 'games_base.html'%}
+{%block games%}
+<form  method="POST">
+    <h1 class="imp1">Confirm Delete:</h1>
+    {%csrf_token%}
+    <input class="btn btn-success" type="submit" value="Delete">
+    {%if version%}
+    <a class="btn btn-danger" href="{%url 'games:game' pk=version.game.pk%}">Cancel</a>
+    {%else%}
+    <a class="btn btn-danger" href="{%url 'games:game' pk=game.pk%}">Cancel</a>
+    {%endif%}
+
+</form>
+{%endblock%}

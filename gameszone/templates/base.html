@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{%load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GamesZoNe</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    
+    <!-- <link rel="stylesheet" href="{%static 'css/main.css'%}"> -->
+    <link rel="icon" type="image/png" href="{%static 'images/icon.png'%}"/>
+    <link rel="stylesheet" href="{%static 'css/main.css'%}">
+    {%block style%}
+    {%endblock%}
+
+</head>
+
+<body>
+    <nav class="mynav" role="navigation" id="navbar">
+            <div class="nav-left">
+                <a class="imp1 logo" href="{%url 'home'%}">GamesZoNe</a>
+                <ul class="nav_links">
+                    <li><a class="myli1"  href="{%url 'games:list'%}">Games</a></li>
+                    {%if user.is_authenticated and user.is_staff%}
+                    <li><a class="myli"  href="{%url 'games:game_add'%}">New Game</a></li>
+                    {%endif%}
+                </ul>
+            </div>
+            <ul class="nav_links nav-right">
+                {% if user.is_authenticated%}
+                    <li><a class="myli" href="{%url 'accounts:logout'%}"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
+                    {%if user.is_staff%}
+                        <li><a class="myli1"  href="{%url 'accounts:list'%}">Admin</a></li>
+                    {%endif%}
+                    <li><a class="cta" href="{%url 'accounts:profile' pk=user.pk%}">Welcome: {{user.username}}</a></li>
+                {%else%}
+                    <li><a  href="{%url 'accounts:login'%}"><i class="glyphicon glyphicon-log-in"></i> Login</a></li>
+                    <li><a class="cta" href="{%url 'accounts:signup'%}">Sign Up</a></li>
+                {%endif%}
+            </ul>
+    </nav>
+    <div class="container">
+        {%block content%}
+        {%endblock%}
+    </div>
+    
+
+</body>
+</html>

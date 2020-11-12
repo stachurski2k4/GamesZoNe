@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+{%block style%}
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'css/accounts/login.css'%}">
+{%endblock%}
+{%block content%}
+    <div class="box left">
+        <h1 class="imp1">Login</h1>
+        <hr>
+        <form method="POST">
+            {%csrf_token%}
+            <div class="login-input">
+                <i class="glyphicon glyphicon-user"></i>
+                {{form.username}}
+            </div>
+            <div class="login-input">
+                <i class="glyphicon glyphicon-lock"></i>
+                {{form.password}}
+            </div>
+            <input class="login-sumbit" type="submit" value="Login">
+        </form>
+    </div>
+
+{%endblock%}

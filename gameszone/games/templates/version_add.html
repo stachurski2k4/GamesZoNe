@@ -1,0 +1,14 @@
+{%extends 'games_base.html'%}
+{%block games%}
+<form enctype="multipart/form-data" method="POST">
+    <h1 class="imp1">Add Version</h1>
+    {%csrf_token%}
+    <label class="in" for="{{ form.version_str.id_for_label }}">Version :</label>
+    {{form.version_str}}
+    <br>
+    <label class="in" for="{{ form.download.id_for_label }}">File :</label>
+    {{form.download}}
+    <br>
+    <input class="btn btn-success" type="submit" value="Add Version">
+</form>
+{%endblock%}

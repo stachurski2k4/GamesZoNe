@@ -1,0 +1,18 @@
+{%extends 'games_base.html'%}
+{%block games%}
+<div class="row">
+    {%for game in list%}
+    <div class="game col-lg-3 col-md-4 col-sm-6">
+    <a href="{%url 'games:game' pk=game.pk%}">
+            {%if game.image%}
+                <img src="{{game.image.url}}" alt="Error" width="200" height="200">
+            {%else%}
+            {%load static%}
+                <img src="{%static 'images/base_game.png' %}" alt="Server Error" width="200" height="200">
+            {%endif%}<br>
+            <h3 >{{game.title}}</h3>
+    </a>
+    </div>
+    {%endfor%}
+</div>
+{%endblock%}

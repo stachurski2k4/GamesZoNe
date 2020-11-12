@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+{%block style%}
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'css/games/main.css'%}">
+{%endblock%}
+
+{%block content%}
+    <div class="game_main">
+       {%block games%}
+       {%endblock%}
+    </div>
+{%endblock%}

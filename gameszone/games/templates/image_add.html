@@ -1,0 +1,13 @@
+{%extends 'games_base.html'%}
+{%block games%}
+<form enctype="multipart/form-data" method="POST">
+    <h1 class="imp1">Add Image</h1>
+    {%csrf_token%}
+    
+    <label class="in" for="{{ form.download.id_for_label }}">Image :</label>
+    {{form.image}}
+    <br>
+    <input class="btn btn-success" type="submit" value="Add Image">
+    <a class="btn btn-danger" href="{%url 'games:game' pk=pk %}">Cancel</a>
+</form>
+{%endblock%}
